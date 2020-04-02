@@ -2,8 +2,11 @@ package main
 
 import (
 	"fmt"
+	"github.com/AnthonyNixon/trivia-api/cmd/handlers/users"
 	"log"
 	"os"
+
+	"github.com/AnthonyNixon/trivia-api/cmd/services/token"
 
 	"github.com/AnthonyNixon/trivia-api/cmd/handlers/sessions"
 
@@ -22,12 +25,14 @@ func init() {
 	}
 
 	database.Initialize()
+	token.Initialize()
 }
 
 func main() {
 	router := router.New()
 	up.AddUpV1(router)
 	sessions.AddSessionsV1(router)
+	users.AddUsersV1(router)
 
 	log.Printf("Running Trivia API on :%s...", PORT)
 
